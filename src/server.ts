@@ -1,15 +1,20 @@
 import { Server } from '@overnightjs/core';
 import bodyParser from 'body-parser';
 import { Application } from 'express';
-import './util/module-alias';
+import morgan from 'morgan';
+import { SaveTempController } from './controller/saveTemp.controller';
+import './utils/module-alias';
 
 export class SetupServer extends Server {
-  constructor(private port = 3000) {
+  constructor(private port?: number | string) {
     super();
   }
 
   public init(): void {
     this.setupExpress();
+    this.settings();
+    this.middleware();
+    this.listen();
     this.setupController();
   }
 
@@ -18,7 +23,21 @@ export class SetupServer extends Server {
   }
 
   private setupController(): void {
-    
+    const saveTempController = new SaveTempController();
+    this.addControllers([saveTempController])
+  }
+
+  private middleware() {
+    this.app.use(morgan('dev'))
+  }
+
+   private settings() {
+    this.app.set('port', this.port || 3000)
+  }
+
+  async listen() {
+    await this.app.listen(this.app.get('port') || 3000)
+    console.log('Server on port ', this.app.get('port'))
   }
 
   public getApp(): Application {
