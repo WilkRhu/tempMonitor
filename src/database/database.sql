@@ -1,0 +1,10 @@
+CREATE DATABASE temp_monitor;
+
+CREATE TABLE saveTemp(
+    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    city VARCHAR(250) NULL,
+    temperature TEXT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+DESCRIBE saveTemp;
