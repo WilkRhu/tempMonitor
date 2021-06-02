@@ -1,1 +1,1 @@
-web: npm run build && node dist/index.js
+web: yarn build && node dist/index.js
