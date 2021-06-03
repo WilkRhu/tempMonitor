@@ -1,18 +1,19 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Controller, Delete, Get, Post } from "@overnightjs/core";
 import { Request, Response } from "express";
-import { deleteCities, getAll, saveTemp } from "../service/saveTempService";
+import { returnHistoric } from "../service/returnHistoric";
+import { deleteCities, saveTemp } from "../service/saveTempService";
 import { setTimeSaveTemp } from "../service/setIntervalSaveTemp";
 
 
-@Controller('cities')
+@Controller('')
 export class SaveTempController {
-    @Get('')
+    @Get('cities/:city')
     async getSaveTemp(req: Request, res: Response) {
         try {
-            const temps = await getAll('saveTemp');
-            console.log(temps)
-            return res.status(200).json(temps[0])
-
+            const { city } = req.params
+            const historic = await returnHistoric(city)
+            return res.status(200).json(historic)
         } catch (error) {
             return res.status(400).json({
                 message: error.message
@@ -33,7 +34,7 @@ export class SaveTempController {
 
     }
 
-    @Get('create/:cities')
+    @Post('cities/:cities')
     async createHistoryCities(req: Request, res: Response) {
         try {
             const { cities } = req.params

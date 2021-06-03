@@ -1,5 +1,5 @@
 import * as ls from 'local-storage';
-import HgBrasil from '../client/hgBrasil';
+import { body } from '../../mock.json';
 import { getCity, saveTemp } from './saveTempService';
 
 const city: Array<[]> = [];
@@ -14,12 +14,12 @@ async function setTimeSaveTemp(cities: string, dates: Date) {
             }
         }
     }
-    const resultApi = await new HgBrasil().hgTemperature(`${cities ? cities : city[0]}`)
+    // const resultApi = await new HgBrasil().hgTemperature(`${cities ? cities : city[0]}`)
     ls.set('@key', dates ? dates.getTime() : ls.get('@key'))
     const dateNew = new Date();
-    const addDate = dateNew.setTime(parseInt(ls.get('@key')) + (30 * 60 * 60 * 1000))
+    const addDate = dateNew.setTime(parseInt(ls.get('@key')) + (1 * 60 * 1000))
     if (new Date().getTime() < addDate) {
-        await saveTemp(resultApi)
+        await saveTemp(body)
         console.log('cadastrou')
         await interval(1)
         return {
@@ -38,7 +38,7 @@ async function setTimeSaveTemp(cities: string, dates: Date) {
 }
 
 const interval = async (verify: number) => {
-    const interval = setTimeout(setTimeSaveTemp, 1 * 60 * 60 * 1000)
+    const interval = setTimeout(setTimeSaveTemp, 30000)
     if (verify === 0) clearTimeout(interval)
 
 }
