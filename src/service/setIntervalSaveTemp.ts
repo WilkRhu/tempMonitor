@@ -39,7 +39,7 @@ async function setTimeSaveTemp(cities: string, dates: Date) {
 }
 
 const interval = async (verify: number) => {
-    const interval = setTimeout(setTimeSaveTemp, 3600000)
+    const interval = setTimeout(setTimeSaveTemp, 3,54e+6)
     if (verify === 0) clearTimeout(interval)
 
 }
