@@ -45,7 +45,7 @@ export class SaveTempController {
                 })
             }
             return res.status(400).json({
-                message: 'Não foi possível criar o histórico'
+                message: 'Could not create history'
             })
         } catch (error) {
             return res.status(400).json({
@@ -60,7 +60,7 @@ export class SaveTempController {
             const { cities } = req.params;
             await deleteCities(cities)
             return res.status(200).json({
-                message: `Deletado o histórico da cidade de ${cities}`
+                message: `Deleted the history of the city of ${cities}`
             })
         } catch (error) {
             return res.status(400).json({
