@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import * as ls from 'local-storage';
-import { body } from '../../mock.json';
+import HgBrasil from '../client/hgBrasil';
 import { getCity, saveTemp } from './saveTempService';
 
 const city: Array<[]> = [];
@@ -10,20 +11,20 @@ async function setTimeSaveTemp(cities: string, dates: Date) {
         const retGetCity = await getCity(cities, 'saveTemp')
         if (retGetCity.length != 0) {
             return {
-                message: 'Já existe um histórico referente pra essa cidade acesse a rota para excluir e criar um novo'
+                message: 'There is already a history for this city, access the route to delete and create a new one'
             }
         }
     }
-    // const resultApi = await new HgBrasil().hgTemperature(`${cities ? cities : city[0]}`)
+    const resultApi = await new HgBrasil().hgTemperature(`${cities ? cities : city[0]}`)
     ls.set('@key', dates ? dates.getTime() : ls.get('@key'))
     const dateNew = new Date();
-    const addDate = dateNew.setTime(parseInt(ls.get('@key')) + (1 * 60 * 1000))
+    const addDate = dateNew.setTime(parseInt(ls.get('@key')) + (30 * 60 * 60 * 1000))
     if (new Date().getTime() < addDate) {
-        await saveTemp(body)
+        await saveTemp(resultApi)
         console.log('cadastrou')
         await interval(1)
         return {
-            message: `Será criado um histórico da cidade ${cities} dentro de 30 horas, retorne para verificar depois de ${format_time(addDate)}`
+            message: `A history of the city will be created ${cities} within 30 hours, return to check after ${format_time(addDate)}`
         };
     } else {
         while (city.length) {
@@ -31,14 +32,14 @@ async function setTimeSaveTemp(cities: string, dates: Date) {
         }
         console.log(city)
         await interval(0)
-        return { message: 'Final da criacao do plano' };
+        return { message: 'End of plan creation' };
 
     }
 
 }
 
 const interval = async (verify: number) => {
-    const interval = setTimeout(setTimeSaveTemp, 30000)
+    const interval = setTimeout(setTimeSaveTemp, 3600000)
     if (verify === 0) clearTimeout(interval)
 
 }
