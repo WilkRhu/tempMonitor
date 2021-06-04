@@ -17,7 +17,7 @@ const returnHistoric = async (cities: string) => {
                 temperatures: arrayHistoric
             }
         }
-        return 'Não existe histórico para a cidade informada!'
+        return 'There is no history for the city informed!'
         
     } catch (error) {
         return error.message
