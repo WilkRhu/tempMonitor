@@ -6,6 +6,6 @@ import mysql from 'mysql2/promise';
     database: process.env.DATA_BASE_NAME,
     password: process.env.DATA_BASE_PASSWORD,
     waitForConnections: true,
-    connectionLimit: 10,
+    connectionLimit: 250,
     queueLimit: 0
   });
