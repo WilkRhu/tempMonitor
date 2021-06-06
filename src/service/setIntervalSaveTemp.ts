@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import HgBrasil from '@src/client/hgBrasil';
 import * as ls from 'local-storage';
+import HgBrasil from '../client/hgBrasil';
 import { getCity, saveTemp } from './saveTempService';
 
 const city: Array<[]> = [];
