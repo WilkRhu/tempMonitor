@@ -38,14 +38,10 @@ export class SaveTempController {
     async createHistoryCities(req: Request, res: Response) {
         try {
             const { cities } = req.params
-            const inter = await setTimeSaveTemp(cities, new Date());
-            if (inter) {
-                return res.status(200).json({
-                    message: inter.message
-                })
-            }
-            return res.status(400).json({
-                message: 'Could not create history'
+            const interval = await setTimeSaveTemp(cities, new Date());
+            if(interval) return res.status(400).json({ message: interval.message })
+            return res.status(200).json({
+                message: `A history of the city will be created ${cities} within 30 hours, return to check after`
             })
         } catch (error) {
             return res.status(400).json({
