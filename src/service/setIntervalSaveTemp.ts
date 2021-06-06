@@ -39,8 +39,8 @@ async function setTimeSaveTemp(cities: string, dates: Date) {
 }
 
 const interval = async (verify: number) => {
-    const interval = await setTimeout(setTimeSaveTemp, 3540000)
-    if (verify === 0) await clearTimeout(interval)
+    const interval = await setInterval(setTimeSaveTemp, 3600000)
+    if (verify === 0) await clearInterval(interval)
 
 }
 
