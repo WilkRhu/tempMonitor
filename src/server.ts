@@ -32,11 +32,11 @@ export class SetupServer extends Server {
   }
 
    private settings() {
-    this.app.set('port', this.port || 3000)
+    this.app.set('port', this.port || process.env.PORT)
   }
 
   async listen() {
-    await this.app.listen(this.app.get('port') || 3000)
+    await this.app.listen(this.app.get('port') || process.env.PORT)
     console.log('Server on port ', this.app.get('port'))
   }
 
