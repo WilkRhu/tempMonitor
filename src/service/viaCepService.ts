@@ -1,6 +1,6 @@
-import { ViaCepDTO } from "@src/dto/viaCepDTO";
-import { InterfaceViaCep } from "@src/interfaces/InterfaceViaCep";
 import { pool } from "../database/database";
+import { ViaCepDTO } from "../dto/viaCepDTO";
+import { InterfaceViaCep } from "../interfaces/InterfaceViaCep";
 
 export class ViaCepService {
     protected async createViaCep(data: ViaCepDTO): Promise<InterfaceViaCep> {
