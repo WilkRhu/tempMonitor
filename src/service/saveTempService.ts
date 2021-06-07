@@ -1,6 +1,6 @@
 import { pool } from '../database/database';
 import { SaveTempDTO } from '../dto/saveTempDTO';
-import { InterfaceHistoric } from '../interfaces/Interfacehistoric';
+import { InterfaceHistoric } from '../interfaces/InterfaceHistoric';
 
 export class SaveTempService {
 
