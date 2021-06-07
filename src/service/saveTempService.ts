@@ -1,6 +1,6 @@
-import { SaveTempDTO } from '@src/dto/saveTempDTO';
-import { InterfaceHistoric } from '@src/interfaces/InterfaceHistoric';
 import { pool } from '../database/database';
+import { SaveTempDTO } from '../dto/saveTempDTO';
+import { InterfaceHistoric } from '../interfaces/Interfacehistoric';
 
 export class SaveTempService {
 
@@ -21,7 +21,7 @@ export class SaveTempService {
     }
 
     protected async deleteHistoric(city: string): Promise<InterfaceHistoric[]> {
-        const ret = await pool.query(`UPDATE saveTemp SET temp = ${0}, date = '', time = '' WHERE city = '${city}'`)
+        await pool.query(`UPDATE saveTemp SET temp = ${0}, date = '', time = '' WHERE city = '${city}'`)
         return await this.getCity(city)
     }
 
