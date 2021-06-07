@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import { Application } from 'express';
 import morgan from 'morgan';
 import { SaveTempController } from './controller/saveTemp.controller';
+import { ViaCepController } from './controller/viaCepController';
 import './utils/module-alias';
 
 export class SetupServer extends Server {
@@ -24,14 +25,15 @@ export class SetupServer extends Server {
 
   private setupController(): void {
     const saveTempController = new SaveTempController();
-    this.addControllers([saveTempController])
+    const viaCepController = new ViaCepController();
+    this.addControllers([saveTempController, viaCepController])
   }
 
   private middleware() {
     this.app.use(morgan('dev'))
   }
 
-   private settings() {
+  private settings() {
     this.app.set('port', this.port || process.env.PORT)
   }
 

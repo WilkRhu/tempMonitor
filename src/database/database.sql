@@ -10,3 +10,20 @@ CREATE TABLE saveTemp(
 );
 
 DESCRIBE saveTemp;
+
+CREATE TABLE viaCep(
+    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    cep VARCHAR(250) NULL,
+    logradouro VARCHAR(250) NULL,
+    complemento VARCHAR(250) NULL,
+    bairro VARCHAR(250) NULL,
+    localidade VARCHAR(250) NULL,
+    uf VARCHAR(250) NULL,
+    ibge VARCHAR(250) NULL,
+    gia VARCHAR(250) NULL,
+    ddd VARCHAR(250) NULL,
+    siafi VARCHAR(250) NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+DESCRIBE viaCep;
