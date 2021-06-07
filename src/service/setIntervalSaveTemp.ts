@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import * as ls from 'local-storage';
 import HgBrasil from '../client/hgBrasil';
-import { getCity, saveTemp } from './saveTempService';
+import { SaveTempService } from './saveTempService';
 
-const city: Array<[]> = [];
- const setTimeSaveTemp = async (cities: string, dates: Date) => {
+export class SetTime extends SaveTempService {
+    public  async setTimeSaveTemp (cities: string, dates: Date): Promise<any>{
+     const city: Array<[]> = [];
      try {
         if (cities) {
-            const retGetCity = await getCity(cities, 'saveTemp')
+            const retGetCity = await this.getCity(cities)
             if (retGetCity.length != 0) {
                 return {
                     message: 'There is already a history for this city, access the route to delete and create a new one'
@@ -21,15 +22,15 @@ const city: Array<[]> = [];
         const dateNew = new Date();
         const addDate = dateNew.setTime(parseInt(ls.get('@key')) + (30 * 60 * 60 * 1000))
         if (new Date().getTime() < addDate) {
-            await saveTemp(resultApi)
+            await this.saveTemp(resultApi)
             console.log('cadastrou')
-            interval(1)
+            this.interval(1)
         } else {
             while (city.length) {
                 city.pop();
             }
             console.log(city)
-            interval(0)
+            this.interval(0)
     
         }
      } catch (error) {
@@ -38,10 +39,10 @@ const city: Array<[]> = [];
 
 }
 
-const interval = (verify: number) => {
-    if(verify > 0) setTimeout(setTimeSaveTemp, 3600000)
+public interval = (verify: number) => {
+    if(verify > 0) setTimeout(this.setTimeSaveTemp, 3600000)
     clearTimeout()
 }
 
-export { setTimeSaveTemp };
+}
 
