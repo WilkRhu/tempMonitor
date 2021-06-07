@@ -3,9 +3,8 @@ import bodyParser from 'body-parser';
 import { Application } from 'express';
 import morgan from 'morgan';
 import { SaveTempController } from './controller/saveTemp.controller';
-import { ViaCepController } from './controller/viaCepController';
+import { ViaCepController } from './controller/viaCep.controller';
 import './utils/module-alias';
-
 export class SetupServer extends Server {
   constructor(private port?: number | string) {
     super();
